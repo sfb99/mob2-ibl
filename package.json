@@ -1,0 +1,25 @@
+{
+  "name": "mob2-ibl",
+  "description": "Actions for accessing the IBL",
+  "author": "Mob 2",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deployG": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "zipup": "zip -r ../mob2-ibl.zip *",
+    "createA": "npm run zipup && sh ../createLambda.sh",
+    "deployA": "npm run zipup && sh ../deployLambda.sh"
+  },
+  "dependencies": {
+    "@ibl/client": "^5.2.0",
+    "actions-on-google": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.0",
+    "eslint-config-google": "^0.9.1"
+  }
+}
