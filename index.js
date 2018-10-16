@@ -30,7 +30,7 @@ app.intent('whats popular', async (conv) => {
     if (i > 0) popular += ", ";
     carousel.items[results.elements[i].id] = {
       synonyms: [
-        results.elements[i].title
+        results.elements[i].title + ' ' + results.elements[i].subtitle
       ],
       title: results.elements[i].title + ' ' + results.elements[i].subtitle,
       description: results.elements[i].synopses.small,
