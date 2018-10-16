@@ -2,7 +2,7 @@
 
 // Import the Dialogflow module and response creation dependencies
 // from the Actions on Google client library.
-const {dialogflow, Image, Carousel} = require('actions-on-google');
+const {dialogflow, Image, Carousel, BasicCard} = require('actions-on-google');
 
 const client = require('@ibl/client').createClient();
 
@@ -47,12 +47,23 @@ app.intent('whats popular', async (conv) => {
   conv.ask(new Carousel(carousel));
 });
 
-app.intent('actions.intent.OPTION', (conv, params, option) => {
-  // let response = 'You did not select any item';
-  // if (option && SELECTED_ITEM_RESPONSES.hasOwnProperty(option)) {
-  //   response = SELECTED_ITEM_RESPONSES[option];
-  // }
-  conv.ask(option);
+app.intent('actions.intent.OPTION', async (conv, params, option) => {
+  let result = await client.getEpisodes(option);
+
+  let simpleResponse = `${result[0].title} ${result[0].subtitle}. ${result[0].synopses.medium}`;
+  let card = {
+    title: result[0].title,
+    subtitle: result[0].subtitle,
+    text: result[0].synopses.medium,
+    image: new Image({
+      url: result[0].images.standard,
+      alt: result[0].title,
+    }),
+    display: 'CROPPED',
+  };
+
+  conv.ask(simpleResponse);
+  conv.ask(new BasicCard(card));
 });
 
 app.intent('Default Fallback Intent', (conv) => {
