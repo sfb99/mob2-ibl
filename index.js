@@ -45,7 +45,15 @@ app.intent('whats popular', async (conv) => {
   // conv.close(popular);
   conv.ask(popular);
   conv.ask(new Carousel(carousel));
-})
+});
+
+app.intent('actions.intent.OPTION', (conv, params, option) => {
+  // let response = 'You did not select any item';
+  // if (option && SELECTED_ITEM_RESPONSES.hasOwnProperty(option)) {
+  //   response = SELECTED_ITEM_RESPONSES[option];
+  // }
+  conv.ask(option);
+});
 
 app.intent('Default Fallback Intent', (conv) => {
   console.log('Are you getting here? Want a pancake?');
