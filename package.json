@@ -10,7 +10,7 @@
     "start": "npm run shell",
     "deployG": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "zipup": "zip -r mob2-ibl.zip *",
+    "zipup": "rm mob2-ibl.zip && zip -r mob2-ibl.zip *",
     "createA": "npm run zipup && sh createLambda.sh",
     "deployA": "npm run zipup && sh deployLambda.sh"
   },
