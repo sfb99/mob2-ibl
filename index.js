@@ -35,7 +35,8 @@ app.intent('whats popular', async (conv) => {
       title: results.elements[i].title + ' ' + results.elements[i].subtitle,
       description: results.elements[i].synopses.small,
       image: new Image({
-        url: results.elements[i].images.standard,
+        // url: results.elements[i].images.standard,
+        url: `https://loremflickr.com/860/640?random=${results.elements[i].id}`,
         alt: results.elements[i].title,
       }),
     };
@@ -56,7 +57,8 @@ app.intent('actions.intent.OPTION', async (conv, params, option) => {
     subtitle: result[0].subtitle,
     text: result[0].synopses.medium,
     image: new Image({
-      url: result[0].images.standard,
+      // url: result[0].images.standard,
+      url: `https://loremflickr.com/860/640?random=${result[0].id}`,
       alt: result[0].title,
     }),
     display: 'CROPPED',
