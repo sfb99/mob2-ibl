@@ -68,6 +68,19 @@ app.intent('actions.intent.OPTION', async (conv, params, option) => {
   conv.ask(new BasicCard(card));
 });
 
+app.intent('get categories', async (conv) => {
+  let results = await client.getCategories();
+
+  var cats = [];
+
+  for(let i = 0; i < results.length; i++)
+  {
+    cats.push(results[i].title);
+  }
+
+  conv.ask(`The categories are: ${cats.join(', ')}`);
+});
+
 app.intent('Default Fallback Intent', (conv) => {
   console.log('Are you getting here? Want a pancake?');
   conv.ask(`I didn't understand. Can you tell me something else?`);
