@@ -81,6 +81,25 @@ app.intent('get categories', async (conv) => {
   conv.ask(`The categories are: ${cats.join(', ')}`);
 });
 
+app.intent('get programmes for category', async (conv, params) => {
+  conv.ask(`There's loads of 'em, mate`);
+
+  let categories = await client.getCategories();
+
+  let chosenCategory = categories.find(cat => cat.title === params['iplayer-categories']);
+
+  let results = await client.getCategoryHighlights(chosenCategory.id);
+
+  var highlights = [];
+
+  for(let i = 0; i < results.elements.length; i++)
+  {
+    highlights.push(results.elements[i].title);
+  }
+
+  conv.ask(`The highlights are: ${highlights.join(', ')}`);
+});
+
 app.intent('Default Fallback Intent', (conv) => {
   console.log('Are you getting here? Want a pancake?');
   conv.ask(`I didn't understand. Can you tell me something else?`);
